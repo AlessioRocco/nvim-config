@@ -1,0 +1,1 @@
+-- Autocommands go here, each in its own augroup so re-sourcing the file doesn't stack them.
