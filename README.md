@@ -57,6 +57,23 @@ time a file of its type opens. Updating the plugin with `vim.pack.update()` rebu
 - **lazygit**: `<leader>gg` opens it in a floating terminal, in the repository of the current file, and closes it when
   lazygit exits. It reads its theme from `~/.config/lazygit/config.yml`; `lua/lazygit.lua` has the code.
 
+## Comments to the AI
+
+[herdr-nvim](https://herdr.dev) comments code and sends the comments to an agent running in Herdr. Herdr installs it
+under `~/.local/share/herdr-nvim/app/<hash>/` and updates it, so it isn't a `vim.pack` entry:
+`lua/plugins/herdr-nvim.lua` adds the newest install to the runtimepath, or the copy the Herdr sidebar already put
+there, and does nothing on a machine without Herdr.
+
+- `<leader>ac` comments the line or selection, `<leader>al` lists the comments (`<CR>` edits, `d` deletes).
+- `<leader>as` pastes the comments in the agent's prompt, `<leader>aS` submits them. Both clear them once sent.
+- `<leader>ai` drops a bare `path:line` reference of the line or selection at the agent's cursor.
+- `:Herdr comment|list|send|submit|ref` does the same, with a range.
+
+Comments live in memory: a restart loses them.
+
+The Herdr sidebar starts `nvim` with the global `NVIM_APPNAME`, so it runs LazyVim until the sidebar gets
+`NVIM_APPNAME=avim`. That change belongs to the Nix config, not this repo.
+
 ## Plugins
 
 `vim.pack` installs the plugins on the first start, at the revisions in `nvim-pack-lock.json`. The lockfile is
