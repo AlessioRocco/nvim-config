@@ -74,6 +74,15 @@ Comments live in memory: a restart loses them.
 The Herdr sidebar starts `nvim` with the global `NVIM_APPNAME`, so it runs LazyVim until the sidebar gets
 `NVIM_APPNAME=avim`. That change belongs to the Nix config, not this repo.
 
+## UI
+
+- **Statusline** (mini.statusline): mode, branch, diagnostics count, path relative to the cwd, line and column. No
+  tabline: buffers are in the picker (`<leader>,`); `mini.tabline` is the one to add if they're missed.
+- **Key hints** (mini.clue): after `<leader>`, `g`, `z`, `[`, `]`, `<C-w>`, `"`/`<C-r>` (registers) and
+  `'`/`\`` (marks). The leader groups are `a` AI, `f` files, `g` git, `o` other, `s` search.
+- **Messages and cmdline**: 0.12's experimental ui2 (`lua/ui2.lua`), with its defaults. No "Press ENTER" prompt:
+  long output collapses with a `[+x]` marker, and `g<` opens it in a pager.
+
 ## Plugins
 
 `vim.pack` installs the plugins on the first start, at the revisions in `nvim-pack-lock.json`. The lockfile is
