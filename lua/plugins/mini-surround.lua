@@ -7,6 +7,5 @@ require("mini.surround").setup({
     find_left = ";F",
     highlight = ";h",
     replace = ";r",
-    update_n_lines = ";n",
   },
 })
