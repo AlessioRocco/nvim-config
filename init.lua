@@ -2,6 +2,8 @@
 vim.loader.enable()
 
 require("options")
+-- Before anything that can print, so startup messages go through it too.
+require("ui2")
 require("keymaps")
 require("autocmds")
 require("lazygit")
