@@ -35,6 +35,7 @@ clue.setup({
     leader("o", "+Other"),
     leader("s", "+Search"),
     leader("u", "+Toggle"),
+    leader("<Tab>", "+Tabs"),
     clue.gen_clues.g(),
     clue.gen_clues.z(),
     clue.gen_clues.square_brackets(),
