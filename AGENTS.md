@@ -17,6 +17,12 @@ send comments to the AI. A feature that serves none of the three doesn't go in.
   prebuilt binaries downloaded by plugins usually don't run on NixOS.
 - One file per plugin under `lua/plugins/`; it calls `vim.pack.add` for its own plugin, then configures it. Don't
   edit other plugins' files unless the change needs it.
+- `lua/plugins/init.lua` requires `mini.lua` (adds `mini.nvim`), then `colorscheme.lua`, then every other file of the
+  directory in alphabetical order. A new plugin needs no edit to `init.lua`. A mini module goes in
+  `lua/plugins/mini-<module>.lua` and only calls its `setup()`: `mini.lua` already added the plugin.
+- Pass `{ confirm = false }` to `vim.pack.add`: the plugin list is in the repo, so a first start installs without
+  asking.
+- Commit `nvim-pack-lock.json` whenever a plugin is added, updated or removed.
 - Every keymap gets a `desc`.
 - Format Lua with `stylua` (`stylua.toml`).
 - Code, comments, commits and PR text in English. Comments say why, in a line, not what.
