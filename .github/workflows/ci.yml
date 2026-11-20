@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: JohnnyMorganz/stylua-action@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: 2.6.0
+          args: --check .
+
+  startup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
+          version: stable
+      - name: Point a scratch XDG tree at the checkout
+        run: |
+          for dir in config data state cache; do
+            mkdir -p "$RUNNER_TEMP/$dir"
+            echo "XDG_${dir^^}_HOME=$RUNNER_TEMP/$dir" >> "$GITHUB_ENV"
+          done
+          ln -s "$GITHUB_WORKSPACE" "$RUNNER_TEMP/config/avim"
+          echo "NVIM_APPNAME=avim" >> "$GITHUB_ENV"
+      # Headless Neovim exits 0 even when the config raises, so the check reads the output. The first start installs
+      # the plugins from the lockfile, the second loads them already installed.
+      - name: Start twice without errors
+        run: |
+          for run in install loaded; do
+            out=$(nvim --headless +qa 2>&1)
+            echo "$out"
+            if echo "$out" | grep -qE '^(Error|E[0-9]+:)'; then
+              echo "::error::Neovim reported an error on the $run start"
+              exit 1
+            fi
+          done
+      - name: Check the lockfile is unchanged
+        run: git diff --exit-code nvim-pack-lock.json
