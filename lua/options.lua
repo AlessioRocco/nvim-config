@@ -5,6 +5,8 @@ vim.g.mapleader = " "
 
 vim.o.colorcolumn = "+1"
 vim.o.swapfile = false
+-- Yanks, deletes and puts go through the system clipboard.
+vim.o.clipboard = "unnamedplus"
 -- Treesitter folds every function; start with all of them open.
 vim.o.foldlevel = 99
 -- A project's .nvim.lua runs once :trust allows it, for per-project exceptions like its formatters.
