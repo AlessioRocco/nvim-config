@@ -32,6 +32,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
     if client:supports_method("textDocument/definition") then
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = ev.buf, desc = "Go to definition" })
     end
+    if client:supports_method("textDocument/completion") then
+      -- Accepting an item with <C-y> then applies its edits too: imports, snippets, commands.
+      vim.lsp.completion.enable(true, client.id, ev.buf)
+      -- 'autocomplete' asks the omnifunc first; ftplugins like Ruby's set their own, so point it at the LSP.
+      vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+      if not vim.startswith(vim.bo[ev.buf].complete, "o,") then
+        vim.bo[ev.buf].complete = "o," .. vim.bo[ev.buf].complete
+      end
+    end
   end,
 })
 

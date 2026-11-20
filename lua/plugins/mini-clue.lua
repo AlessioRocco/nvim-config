@@ -34,6 +34,7 @@ clue.setup({
     leader("g", "+Git"),
     leader("o", "+Other"),
     leader("s", "+Search"),
+    leader("u", "+Toggle"),
     clue.gen_clues.g(),
     clue.gen_clues.z(),
     clue.gen_clues.square_brackets(),
