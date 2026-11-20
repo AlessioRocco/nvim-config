@@ -7,6 +7,7 @@ require("ui2")
 require("keymaps")
 require("autocmds")
 require("lazygit")
+require("erb_lint")
 require("plugins")
 -- After plugins: the server configs come from nvim-lspconfig.
 require("lsp")

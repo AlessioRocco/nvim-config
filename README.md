@@ -13,6 +13,7 @@ It runs next to LazyVim as `NVIM_APPNAME=avim` (the `avim` alias). Nix provides 
 - `lua/options.lua`, `lua/keymaps.lua`, `lua/autocmds.lua` hold the editor settings.
 - `lua/plugins/` has one file per plugin, each installing its own plugin with `vim.pack.add`.
 - `lua/lazygit.lua` opens lazygit in a floating terminal.
+- `lua/erb_lint.lua` shows `erb_lint` offenses as diagnostics on ERB files.
 - `lua/lsp.lua` enables the language servers found on `$PATH`, adds `gd` and sets up diagnostics.
 - `after/lsp/` overrides a server's config. The configs themselves come from the `lsp/` files of
   [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig), installed as a plugin and never `require`d.
@@ -79,9 +80,25 @@ The Herdr sidebar starts `nvim` with the global `NVIM_APPNAME`, so it runs LazyV
 - **Statusline** (mini.statusline): mode, branch, diagnostics count, path relative to the cwd, line and column. No
   tabline: buffers are in the picker (`<leader>,`); `mini.tabline` is the one to add if they're missed.
 - **Key hints** (mini.clue): after `<leader>`, `g`, `z`, `[`, `]`, `<C-w>`, `"`/`<C-r>` (registers) and
-  `'`/`\`` (marks). The leader groups are `a` AI, `f` files, `g` git, `o` other, `s` search.
+  `'`/`\`` (marks). The leader groups are `a` AI, `f` files, `g` git, `o` other, `s` search, `u` toggles.
 - **Messages and cmdline**: 0.12's experimental ui2 (`lua/ui2.lua`), with its defaults. No "Press ENTER" prompt:
   long output collapses with a `[+x]` marker, and `g<` opens it in a pager.
+
+## Editing
+
+- **Completion**: Neovim's own. The `autocomplete` option opens the menu as you type, with words from the open
+  buffers; where a language server attaches, its items come first (`vim.lsp.completion`, wired in `lua/lsp.lua`).
+  `<C-n>`/`<C-p>` move, `<C-y>` accepts (and applies imports and snippets), `<C-e>` closes. No preselection, so
+  `<CR>` is always a newline.
+- **Surround** (mini.surround): `;;` add, `;d` delete, `;r` replace, `;f`/`;F` find, `;h` highlight.
+- **Text objects** (mini.ai): mini's defaults, such as `q` quotes, `b` brackets, `f` function calls, `a`
+  arguments and `t` tags, plus `g` for the whole buffer (`yag`).
+- **Comments**: Neovim's `gc`/`gcc`.
+- **Format on save** ([conform.nvim](https://github.com/stevearc/conform.nvim)): `stylua` for Lua, `shfmt` for
+  shell, `erb-format` then `erb_lint --autocorrect` for ERB, the language server for everything else. A formatter
+  that isn't on `$PATH` is skipped, so `erb_lint` runs only inside a project's devenv. `<leader>uf` toggles it
+  everywhere, `<leader>uF` for the current buffer; `:ConformInfo` shows what would run.
+- **ERB lint**: `erb_lint` diagnostics after a file is read or written, when `erb_lint` is on `$PATH`.
 
 ## Plugins
 
