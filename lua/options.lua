@@ -10,10 +10,9 @@ vim.o.foldlevel = 99
 -- A project's .nvim.lua runs once :trust allows it, for per-project exceptions like its formatters.
 vim.o.exrc = true
 
--- Built-in completion as you type: words from the open buffers, plus the LSP where one attaches (lua/lsp.lua).
-vim.o.autocomplete = true
--- No item preselected, so <CR> stays a newline; "popup" shows the item's docs next to the menu.
-vim.o.completeopt = "menuone,noselect,popup,fuzzy"
+-- mini.completion's recommended value plus fuzzy: no item preselected, so <CR> stays a newline. No "popup": its own
+-- info window shows the item's docs.
+vim.o.completeopt = "menuone,noselect,fuzzy"
 
 vim.filetype.add({
   filename = {

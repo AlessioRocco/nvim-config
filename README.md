@@ -86,10 +86,11 @@ The Herdr sidebar starts `nvim` with the global `NVIM_APPNAME`, so it runs LazyV
 
 ## Editing
 
-- **Completion**: Neovim's own. The `autocomplete` option opens the menu as you type, with words from the open
-  buffers; where a language server attaches, its items come first (`vim.lsp.completion`, wired in `lua/lsp.lua`).
-  `<C-n>`/`<C-p>` move, `<C-y>` accepts (and applies imports and snippets), `<C-e>` closes. No preselection, so
-  `<CR>` is always a newline.
+- **Completion** (mini.completion): the menu opens as you type. Where a language server attaches it lists the
+  server's items, with mini.icons' kind icons; words from the open buffers come only when the server has none, so a
+  word never shows twice. The item's docs and the signature help open in floating windows (`<C-f>`/`<C-b>` scroll
+  them). `<C-n>`/`<C-p>` move, `<C-y>` accepts (and applies imports and snippets, through `vim.snippet`), `<C-e>`
+  closes, `<C-Space>` forces it open. No preselection, so `<CR>` is always a newline.
 - **Surround** (mini.surround): `;;` add, `;d` delete, `;r` replace, `;f`/`;F` find, `;h` highlight.
 - **Text objects** (mini.ai): mini's defaults, such as `q` quotes, `b` brackets, `f` function calls, `a`
   arguments and `t` tags, plus `g` for the whole buffer (`yag`).
