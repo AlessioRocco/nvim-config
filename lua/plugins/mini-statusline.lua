@@ -11,8 +11,13 @@ local function filename()
 end
 
 local function branch()
-  local head = (vim.b.minigit_summary or {}).head_name
-  return head and (" " .. head) or ""
+  local summary = vim.b.minigit_summary or {}
+  if not summary.head_name then
+    return ""
+  end
+  -- A rebase or merge left halfway changes what every command does, so it sits next to the branch.
+  local in_progress = summary.in_progress or ""
+  return " " .. summary.head_name .. (in_progress ~= "" and ("|" .. in_progress) or "")
 end
 
 statusline.setup({

@@ -77,7 +77,8 @@ The Herdr sidebar starts `nvim` with the global `NVIM_APPNAME`, so it runs LazyV
 
 ## UI
 
-- **Statusline** (mini.statusline): mode, branch, diagnostics count, path relative to the cwd, line and column. No
+- **Statusline** (mini.statusline): mode, branch, diagnostics count, path relative to the cwd, line and column. A
+  rebase, merge, cherry-pick, revert or bisect in progress shows next to the branch, as `main|rebase`. No
   tabline: buffers are in the picker (`<leader>,`); `mini.tabline` is the one to add if they're missed.
 - **Key hints** (mini.clue): after `<leader>`, `g`, `z`, `[`, `]`, `<C-w>`, `"`/`<C-r>` (registers) and
   `'`/`\`` (marks). The leader groups are `a` AI, `f` files, `g` git, `o` other, `s` search, `u` toggles.
