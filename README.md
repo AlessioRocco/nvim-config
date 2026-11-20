@@ -12,7 +12,16 @@ It runs next to LazyVim as `NVIM_APPNAME=avim` (the `avim` alias). Nix provides 
 - `init.lua` enables the module loader and requires the files below.
 - `lua/options.lua`, `lua/keymaps.lua`, `lua/autocmds.lua` hold the editor settings.
 - `lua/plugins/` has one file per plugin, each installing its own plugin with `vim.pack.add`.
-- `lsp/` has one file per language server, picked up by `vim.lsp.enable`.
+- `lua/lsp.lua` enables the language servers found on `$PATH`, adds `gd` and sets up diagnostics.
+- `after/lsp/` overrides a server's config. The configs themselves come from the `lsp/` files of
+  [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig), installed as a plugin and never `require`d.
+
+## Language servers
+
+Nix puts the servers on `$PATH`; there's no Mason. `ruby_lsp` and `rubocop` come from each project's devenv, so start
+`avim` from inside it. A server whose executable isn't on `$PATH` at startup stays off. To add one, add its name and
+executable to the `servers` table in `lua/lsp.lua`, and an `after/lsp/<name>.lua` only if lspconfig's defaults need
+changing.
 
 ## Plugins
 

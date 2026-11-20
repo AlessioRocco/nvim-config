@@ -5,3 +5,5 @@ require("options")
 require("keymaps")
 require("autocmds")
 require("plugins")
+-- After plugins: the server configs come from nvim-lspconfig.
+require("lsp")
