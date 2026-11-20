@@ -14,4 +14,16 @@ It runs next to LazyVim as `NVIM_APPNAME=avim` (the `avim` alias). Nix provides 
 - `lua/plugins/` has one file per plugin, each installing its own plugin with `vim.pack.add`.
 - `lsp/` has one file per language server, picked up by `vim.lsp.enable`.
 
+## Plugins
+
+`vim.pack` installs the plugins on the first start, at the revisions in `nvim-pack-lock.json`. The lockfile is
+committed, so a fresh clone gets the same revisions.
+
+- **Add**: create `lua/plugins/<name>.lua` calling `vim.pack.add`, then configuring the plugin. `lua/plugins/init.lua`
+  picks it up on the next start.
+- **Update**: run `:lua vim.pack.update()`, read the changes, `:write` to apply them or `:quit` to discard them, then
+  commit `nvim-pack-lock.json`.
+- **Remove**: delete the plugin's file, `:restart`, run `:lua vim.pack.del({ "<name>" })`, then commit
+  `nvim-pack-lock.json`.
+
 See `AGENTS.md` for the rules a change has to follow.
