@@ -4,8 +4,9 @@ My Neovim config, built on Neovim 0.12 with `vim.pack` and native LSP. I use it 
 it, so it serves three jobs: navigate code, review the changes of a branch, send comments to the AI. A feature that
 serves none of the three doesn't go in.
 
-It runs next to LazyVim as `NVIM_APPNAME=avim` (the `avim` alias). Nix provides the `nvim` binary, the
-`~/.config/avim` symlink to this checkout and the tools on `$PATH`. Everything else is plain Lua in this repo.
+It's my default editor: Nix sets `NVIM_APPNAME=avim` globally, so `nvim`, `$EDITOR` and the Herdr sidebar all load
+it. Nix also provides the `nvim` binary, the `~/.config/avim` symlink to this checkout and the tools on `$PATH`.
+Everything else is plain Lua in this repo.
 
 ## Layout
 
@@ -73,9 +74,6 @@ there, and does nothing on a machine without Herdr.
 - `:Herdr comment|list|send|submit|ref` does the same, with a range.
 
 Comments live in memory: a restart loses them.
-
-The Herdr sidebar starts `nvim` with the global `NVIM_APPNAME`, so it runs LazyVim until the sidebar gets
-`NVIM_APPNAME=avim`. That change belongs to the Nix config, not this repo.
 
 ## UI
 
