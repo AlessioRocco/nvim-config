@@ -23,6 +23,14 @@ Nix puts the servers on `$PATH`; there's no Mason. `ruby_lsp` and `rubocop` come
 executable to the `servers` table in `lua/lsp.lua`, and an `after/lsp/<name>.lua` only if lspconfig's defaults need
 changing.
 
+## Treesitter
+
+Highlighting, folds and indentation come from treesitter, started by a `FileType` autocmd in
+`lua/plugins/treesitter.lua`. [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) (`main` branch)
+only installs the parsers and ships the queries. It compiles them with `tree-sitter` and `gcc` from `$PATH` into
+`~/.local/share/avim/site/parser`. The parsers in the `install` list are installed at startup; any other one the first
+time a file of its type opens. Updating the plugin with `vim.pack.update()` rebuilds them.
+
 ## Plugins
 
 `vim.pack` installs the plugins on the first start, at the revisions in `nvim-pack-lock.json`. The lockfile is

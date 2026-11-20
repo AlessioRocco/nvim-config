@@ -5,6 +5,8 @@ vim.g.mapleader = " "
 
 vim.o.colorcolumn = "+1"
 vim.o.swapfile = false
+-- Treesitter folds every function; start with all of them open.
+vim.o.foldlevel = 99
 
 vim.filetype.add({
   filename = {
