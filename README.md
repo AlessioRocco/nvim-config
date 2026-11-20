@@ -31,6 +31,20 @@ only installs the parsers and ships the queries. It compiles them with `tree-sit
 `~/.local/share/avim/site/parser`. The parsers in the `install` list are installed at startup; any other one the first
 time a file of its type opens. Updating the plugin with `vim.pack.update()` rebuilds them.
 
+## Navigation
+
+- **Picker** ([mini.pick](https://github.com/nvim-mini/mini.nvim), with mini.extra and mini.visits):
+  `<leader><space>`/`<leader>ff` files, `<leader>fg` git files, `<leader>fr` recent files of the cwd,
+  `<leader>/`/`<leader>sg` grep (`rg`), `<leader>,` buffers, `<leader>sh` help, `<leader>sd`/`<leader>sD`
+  diagnostics, `<leader>ss`/`<leader>sS` LSP symbols, `<leader>sR` resume. It's also `vim.ui.select`.
+- **Explorer** (mini.files): `-` opens the directory of the current file, `_` the cwd.
+- **Jumps**: `s` then a character shows labels in every window (mini.jump2d); `f`/`F`/`t`/`T` cross lines
+  (mini.jump).
+- **Words**: `w`/`e`/`b` stop inside camelCase and snake_case
+  ([nvim-spider](https://github.com/chrisgrieser/nvim-spider)).
+- **Alternate file**: `<leader>oo`, `<leader>os` (split), `<leader>ov` (vsplit), with the Rails preset of
+  [other.nvim](https://github.com/rgroli/other.nvim) plus components and extensions.
+
 ## Plugins
 
 `vim.pack` installs the plugins on the first start, at the revisions in `nvim-pack-lock.json`. The lockfile is
