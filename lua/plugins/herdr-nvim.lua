@@ -26,5 +26,19 @@ if not vim.api.nvim_get_runtime_file("lua/herdr-nvim/init.lua", false)[1] then
   vim.opt.runtimepath:append(dir)
 end
 
--- Safe to call again: the sidebar daemon calls setup() on VimEnter and keeps the maps set here.
-require("herdr-nvim").setup({ prefix = "<leader>a", keymaps = true })
+local herdr = require("herdr-nvim")
+-- The plugin keeps its default maps only for backward compatibility. The sidebar daemon calls setup() again on
+-- VimEnter: keymaps stays false and the plugin leaves alone maps it didn't set.
+herdr.setup({ keymaps = false })
+
+vim.keymap.set("x", "<leader>ac", herdr.comment_selection, { desc = "Comment selection for the AI" })
+vim.keymap.set("n", "<leader>ac", herdr.comment_line, { desc = "Comment line for the AI" })
+vim.keymap.set("n", "<leader>al", herdr.list_comments, { desc = "List AI comments" })
+vim.keymap.set("n", "<leader>as", function()
+  herdr.send_all({ submit = false })
+end, { desc = "Paste comments in the agent's prompt" })
+vim.keymap.set("n", "<leader>aS", function()
+  herdr.send_all({ submit = true })
+end, { desc = "Submit comments to the agent" })
+vim.keymap.set("x", "<leader>ai", herdr.ref_selection, { desc = "Reference selection at the agent's cursor" })
+vim.keymap.set("n", "<leader>ai", herdr.ref_line, { desc = "Reference line at the agent's cursor" })
