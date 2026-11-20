@@ -44,6 +44,8 @@ time a file of its type opens. Updating the plugin with `vim.pack.update()` rebu
   (mini.jump).
 - **Words**: `w`/`e`/`b` stop inside camelCase and snake_case
   ([nvim-spider](https://github.com/chrisgrieser/nvim-spider)).
+- **Tabs**: `<leader><tab><tab>` new, `<leader><tab>d` close, `<leader><tab>]`/`<leader><tab>[` next/previous,
+  `<leader><tab>f`/`<leader><tab>l` first/last, `<leader><tab>o` closes the others.
 - **Alternate file**: `<leader>oo`, `<leader>os` (split), `<leader>ov` (vsplit), with the Rails preset of
   [other.nvim](https://github.com/rgroli/other.nvim) plus components and extensions.
 
@@ -81,7 +83,7 @@ The Herdr sidebar starts `nvim` with the global `NVIM_APPNAME`, so it runs LazyV
   rebase, merge, cherry-pick, revert or bisect in progress shows next to the branch, as `main|rebase`. No
   tabline: buffers are in the picker (`<leader>,`); `mini.tabline` is the one to add if they're missed.
 - **Key hints** (mini.clue): after `<leader>`, `g`, `z`, `[`, `]`, `<C-w>`, `"`/`<C-r>` (registers) and
-  `'`/`\`` (marks). The leader groups are `a` AI, `f` files, `g` git, `o` other, `s` search, `u` toggles.
+  `'`/`\`` (marks). The leader groups are `a` AI, `f` files, `g` git, `o` other, `s` search, `u` toggles, `<tab>` tabs.
 - **Messages and cmdline**: 0.12's experimental ui2 (`lua/ui2.lua`), with its defaults. No "Press ENTER" prompt:
   long output collapses with a `[+x]` marker, and `g<` opens it in a pager.
 
