@@ -12,6 +12,7 @@ It runs next to LazyVim as `NVIM_APPNAME=avim` (the `avim` alias). Nix provides 
 - `init.lua` enables the module loader and requires the files below.
 - `lua/options.lua`, `lua/keymaps.lua`, `lua/autocmds.lua` hold the editor settings.
 - `lua/plugins/` has one file per plugin, each installing its own plugin with `vim.pack.add`.
+- `lua/lazygit.lua` opens lazygit in a floating terminal.
 - `lua/lsp.lua` enables the language servers found on `$PATH`, adds `gd` and sets up diagnostics.
 - `after/lsp/` overrides a server's config. The configs themselves come from the `lsp/` files of
   [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig), installed as a plugin and never `require`d.
@@ -44,6 +45,17 @@ time a file of its type opens. Updating the plugin with `vim.pack.update()` rebu
   ([nvim-spider](https://github.com/chrisgrieser/nvim-spider)).
 - **Alternate file**: `<leader>oo`, `<leader>os` (split), `<leader>ov` (vsplit), with the Rails preset of
   [other.nvim](https://github.com/rgroli/other.nvim) plus components and extensions.
+
+## Git
+
+- **Hunks** (mini.diff): signs in the gutter against the index. `]h`/`[h` (`]H`/`[H` last/first) move between
+  hunks, `gh`/`gH` apply (stage)/reset the hunks of a motion or selection (`ghgh` the one under the cursor),
+  `<leader>go` toggles the overlay that shows a hunk's old text inline.
+- **Blame and history** (mini.git): `<leader>gb` opens `:Git blame` in a vertical split that scrolls with the file.
+  `<leader>gl` shows the history of the line (or selection) under the cursor; on a commit hash it shows that commit.
+  `:Git <args>` runs any git command.
+- **lazygit**: `<leader>gg` opens it in a floating terminal, in the repository of the current file, and closes it when
+  lazygit exits. It reads its theme from `~/.config/lazygit/config.yml`; `lua/lazygit.lua` has the code.
 
 ## Plugins
 
