@@ -11,8 +11,8 @@ send comments to the AI. A feature that serves none of the three doesn't go in.
 3. Any other plugin only when neither covers it, with a one-line comment at the top of its file saying which job it
    serves and why the first two weren't enough.
 
-- Plain Lua files. Nix gives the `nvim` binary, the `~/.config/avim` symlink, the `avim` alias and the tools on
-  `$PATH`, and generates nothing in this repo.
+- Plain Lua files. Nix gives the `nvim` binary, the global `NVIM_APPNAME=avim`, the `~/.config/avim` symlink and the
+  tools on `$PATH`, and generates nothing in this repo.
 - No Mason. Language servers, linters and formatters come from Nix and are found on `$PATH`. Prefer pure-Lua plugins:
   prebuilt binaries downloaded by plugins usually don't run on NixOS.
 - One file per plugin under `lua/plugins/`; it calls `vim.pack.add` for its own plugin, then configures it. Don't
