@@ -94,10 +94,14 @@ The Herdr sidebar starts `nvim` with the global `NVIM_APPNAME`, so it runs LazyV
 - **Text objects** (mini.ai): mini's defaults, such as `q` quotes, `b` brackets, `f` function calls, `a`
   arguments and `t` tags, plus `g` for the whole buffer (`yag`).
 - **Comments**: Neovim's `gc`/`gcc`.
-- **Format on save** ([conform.nvim](https://github.com/stevearc/conform.nvim)): `stylua` for Lua, `shfmt` for
-  shell, `erb-format` then `erb_lint --autocorrect` for ERB, the language server for everything else. A formatter
-  that isn't on `$PATH` is skipped, so `erb_lint` runs only inside a project's devenv. `<leader>uf` toggles it
-  everywhere, `<leader>uF` for the current buffer; `:ConformInfo` shows what would run.
+- **Format on save** ([conform.nvim](https://github.com/stevearc/conform.nvim)): the project decides. `stylua` for
+  Lua, `shfmt` for shell. ERB gets `erb_lint --autocorrect` with an `.erb_lint.yml`, Herb's `herb-format` when
+  `.herb.yml` enables its formatter, `erb-format` when `Gemfile.lock` has `erb-formatter` or the project declares no
+  ERB tool. JS/TS gets one formatter: `eslint` with an eslint config, else `prettier` with a prettier config, else
+  `vtsls`. Ruby: `ruby_lsp` only. The language server for everything else. A formatter that isn't on `$PATH` is
+  skipped, so `erb_lint` runs only inside a project's devenv. `<leader>uf` toggles it everywhere, `<leader>uF` for
+  the current buffer; `:ConformInfo` shows what would run.
+- **Per-project exceptions**: `exrc` is on, so a project's `.nvim.lua` runs once `:trust` allows it.
 - **ERB lint**: `erb_lint` diagnostics after a file is read or written, when `erb_lint` is on `$PATH`.
 
 ## Plugins

@@ -7,6 +7,8 @@ vim.o.colorcolumn = "+1"
 vim.o.swapfile = false
 -- Treesitter folds every function; start with all of them open.
 vim.o.foldlevel = 99
+-- A project's .nvim.lua runs once :trust allows it, for per-project exceptions like its formatters.
+vim.o.exrc = true
 
 -- Built-in completion as you type: words from the open buffers, plus the LSP where one attaches (lua/lsp.lua).
 vim.o.autocomplete = true
